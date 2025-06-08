@@ -23,7 +23,6 @@ describe('addNoteToPerson', () => {
     expect(updated[1].notes).toEqual(['old']);
     expect(people[0].notes).toEqual([]); // original not mutated
   });
-
   it('adds a note to the correct person when list is filtered', () => {
     const people = [
       {id: 0, name: 'Alice', notes: []},
