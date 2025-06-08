@@ -17,7 +17,8 @@ Install dependencies:
 npm install
 ```
 
-Run on device or emulator:
+Run on device or emulator (requires `@react-native-community/cli` which is
+already listed in `devDependencies`):
 ```bash
 npx react-native run-android  # or run-ios
 ```
