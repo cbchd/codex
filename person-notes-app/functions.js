@@ -1,11 +1,14 @@
 function filterPeople(people, query) {
-  return people.filter(p => p.name.toLowerCase().includes(query.toLowerCase()));
+  return people.filter(p =>
+    p.name.toLowerCase().includes(query.toLowerCase())
+  );
 }
 
-function addNoteToPerson(people, index, note) {
+function addNoteToPerson(people, id, note) {
   const updated = people.map(p => ({...p, notes: [...p.notes]}));
-  if (!note || !updated[index]) return updated;
-  updated[index].notes.push(note);
+  const idx = updated.findIndex(p => p.id === id);
+  if (!note || idx === -1) return updated;
+  updated[idx].notes.push(note);
   return updated;
 }
 

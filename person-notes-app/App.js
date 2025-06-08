@@ -5,24 +5,24 @@ import {filterPeople, addNoteToPerson} from './functions';
 
 export default function App() {
   const [people, setPeople] = useState([
-    {name: 'Alice', notes: []},
-    {name: 'Bob', notes: []},
-    {name: 'Charlie', notes: []},
+    {id: 0, name: 'Alice', notes: []},
+    {id: 1, name: 'Bob', notes: []},
+    {id: 2, name: 'Charlie', notes: []},
   ]);
   const [searchQuery, setSearchQuery] = useState('');
   const [noteInputs, setNoteInputs] = useState({});
 
   const filtered = filterPeople(people, searchQuery);
 
-  const addNote = (index) => {
-    const note = noteInputs[index];
+  const addNote = (id) => {
+    const note = noteInputs[id];
     if (!note) return;
-    const updated = addNoteToPerson(people, index, note);
+    const updated = addNoteToPerson(people, id, note);
     setPeople(updated);
-    setNoteInputs({...noteInputs, [index]: ''});
+    setNoteInputs({...noteInputs, [id]: ''});
   };
 
-  const renderItem = ({item, index}) => (
+  const renderItem = ({item}) => (
     <Card style={{margin: 8}}>
       <Card.Title title={item.name} />
       <Card.Content>
@@ -31,10 +31,10 @@ export default function App() {
         ))}
         <TextInput
           label="Add Note"
-          value={noteInputs[index] || ''}
-          onChangeText={t => setNoteInputs({...noteInputs, [index]: t})}
+          value={noteInputs[item.id] || ''}
+          onChangeText={t => setNoteInputs({...noteInputs, [item.id]: t})}
         />
-        <Button onPress={() => addNote(index)}>Add</Button>
+        <Button onPress={() => addNote(item.id)}>Add</Button>
       </Card.Content>
     </Card>
   );
@@ -54,7 +54,7 @@ export default function App() {
         <FlatList
           data={filtered}
           renderItem={renderItem}
-          keyExtractor={(_, i) => String(i)}
+          keyExtractor={item => String(item.id)}
         />
       </View>
     </PaperProvider>

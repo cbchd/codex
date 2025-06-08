@@ -17,6 +17,11 @@ Install dependencies:
 npm install
 ```
 
+Start the Metro bundler:
+```bash
+npm start
+```
+
 Run on device or emulator (requires `@react-native-community/cli` which is
 already listed in `devDependencies`):
 ```bash
